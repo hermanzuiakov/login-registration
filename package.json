@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "Herman Zuiakov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.5"
+  }
 }
