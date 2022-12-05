@@ -1,0 +1,12 @@
+{
+  "name": "login-registration",
+  "version": "1.0.0",
+  "description": "Login and registration app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Herman Zuiakov",
+  "license": "ISC"
+}
