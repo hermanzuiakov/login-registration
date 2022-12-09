@@ -1,6 +1,11 @@
 const express = require('express'),
     app = express(),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    bodyParser = require('body-parser'),
+    user = require('./models/user');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 mongoose.connect('mongodb://localhost/local',{useMongoClient: true}, ()=>{
     console.log('CONNECTED TO DBS');
