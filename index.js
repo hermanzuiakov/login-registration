@@ -2,7 +2,8 @@ const express = require('express'),
     app = express(),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    user = require('./models/user');
+    user = require('./models/user'),
+    bcrypt = require('bcryptjs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,17 +18,23 @@ app.post('/register', (req, res)=>{
     newUser.email = req.body.email;
     newUser.password = req.body.password;
 
-    newUser.save().then(userSaved=>{
-        res.send('USER SAVED');
-    }).catch(err=>{
-        res.send('USER WAS NOT SAVED \n' + err);
-    });
+    bcrypt.genSalt(10, (err, salt)=>{
+        bcrypt.hash(newUser.password, salt, (err, hash)=>{
+            if(err) return err;
 
-    // res.send(newUser);
+            newUser.password = hash;
+
+            newUser.save().then(userSaved=>{
+                res.send('USER SAVED');
+            }).catch(err=>{
+                res.send('USER WAS NOT SAVED \n' + err);
+            });
+        })
+    })
 });
 
 
-app.listen(4111, async () => {
+app.listen(4111, async()=>{
 
     await mongoose.connect("mongodb://127.0.0.1/login", () => {
         console.log("CONNECTED TO DBS");
